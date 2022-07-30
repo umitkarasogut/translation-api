@@ -1,3 +1,11 @@
+## Install dependencies
+```bash
+npm install	
+```
+## Start at dev
+```bash
+npm run dev	
+```
 ## Example Post Request Body
 ```json
 {
@@ -5,7 +13,6 @@
 	"target" : "tr"
 }	
 ```
-
 ## Expected response
 ```json
 [
