@@ -1,4 +1,4 @@
-## Example POST Request Body
+##Example POST Request Body
 ```json
 {
 	"strings" : ["Hello World","Hello"],
