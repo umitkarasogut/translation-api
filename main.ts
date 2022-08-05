@@ -7,15 +7,21 @@ const app = express()
 app.listen(8080, () => console.log(`Application is running on 127.0.0.1:8080`));
 
 app.post('/', bodyParser.json(), async (request: Request, response: Response, next: NextFunction) => {
-    const strings = request.body.strings
-    const targetLangCode = request.body.target
+    try {
+        const { strings, targetLangCode } = request.body
 
-    const translated = await Promise.all(
-        strings.map(async string => {
-            const { text } = await translatte(string, { to: targetLangCode });
-            return text;
-        })
-    );
+        const translations = strings.map(string => translatte(string, { to: targetLangCode }))
 
-    response.status(200).json(translated);
+        const translated = await Promise.all(translations)
+
+        const results = translated.map(translate => translate.text);
+
+        console.log('Translated !');
+        
+        response.status(200).json(results);
+    } catch (e) {
+        console.log('Translate Failed !');
+        
+        response.status(500).json(e);
+    }
 });
