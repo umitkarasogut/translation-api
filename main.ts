@@ -8,11 +8,11 @@ app.listen(8080, () => console.log(`Application is running on 127.0.0.1:8080`));
 
 app.post('/', bodyParser.json(), async (request: Request, response: Response, next: NextFunction) => {
     try {
-        const { strings, targetLangCode } = request.body
+        const { strings, targetLangCode } = request.body;
 
-        const translations = strings.map(string => translatte(string, { to: targetLangCode }))
+        const translations = strings.map(string => translatte(string, { to: targetLangCode }));
 
-        const translated = await Promise.all(translations)
+        const translated = await Promise.all(translations);
 
         const results = translated.map(translate => translate.text);
 
